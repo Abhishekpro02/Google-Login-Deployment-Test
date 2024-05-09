@@ -41,11 +41,19 @@ const Navbar = () => {
             </NavLink>
           </li>
           {authUser ? (
-            <li style={styles.navItem}>
-              <button style={styles.logoutButton} onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
+            <>
+              <img
+                src={authUser.avatar}
+                alt=""
+                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+              />
+
+              <li style={styles.navItem}>
+                <button style={styles.logoutButton} onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+            </>
           ) : (
             <li style={styles.navItem}>
               <NavLink to="/login" style={styles.navLink}>
