@@ -6,6 +6,7 @@ import User from "./pages/User";
 import { useAuthContext } from "./context/AuthContext";
 import ProtectedRoute from "./Protectedroute";
 import Navbar from "./Navbar";
+import Login from "./pages/Login";
 
 const App = () => {
   const { authUser } = useAuthContext();
@@ -18,16 +19,15 @@ const App = () => {
         {authUser ? (
           <Route path="/profile" element={<Profile />} />
         ) : (
-          <Route path="/profile" element={<Home />} />
+          <Route path="/profile" element={<Login />} />
         )}
-        {/* <Route path="/profile" element={<Profile />} /> */}
         {authUser ? (
           <Route path="/users" element={<User />} />
         ) : (
-          <Route path="/users" element={<Home />} />
+          <Route path="/users" element={<Login />} />
         )}
-        {/* <Route path="/users" element={<User />} /> */}
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

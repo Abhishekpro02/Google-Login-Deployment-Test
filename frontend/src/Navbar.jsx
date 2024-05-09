@@ -1,7 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useAuthContext } from "./context/AuthContext";
 
 const Navbar = () => {
+  const { authUser } = useAuthContext();
+
+  const handleLogout = () => {
+    // Perform logout functionality
+    console.log("Logout");
+  };
+
   return (
     <div style={styles.navbarContainer}>
       <nav style={styles.navbar}>
@@ -21,6 +29,19 @@ const Navbar = () => {
               Users
             </NavLink>
           </li>
+          {authUser ? (
+            <li style={styles.navItem}>
+              <button style={styles.logoutButton} onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li style={styles.navItem}>
+              <NavLink to="/login" style={styles.navLink}>
+                Login
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
@@ -50,5 +71,13 @@ const styles = {
   navLink: {
     color: "#fff",
     textDecoration: "none",
+  },
+  logoutButton: {
+    backgroundColor: "#f50f72",
+    color: "#fff",
+    border: "none",
+    padding: "8px 12px",
+    borderRadius: "5px",
+    cursor: "pointer",
   },
 };
