@@ -144,7 +144,7 @@ app.get("/api/profile", isAuthnticated, (req, res) => {
 
 // logout
 
-router.get("/api/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
   req.session.destroy((err) => {
     res.json({
       success: true,
