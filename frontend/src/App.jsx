@@ -8,7 +8,7 @@ import ProtectedRoute from "./Protectedroute";
 
 const App = () => {
   const { authUser } = useAuthContext();
-  const isAuthenticated = authUser !== null;
+  const isAuthenticated = true;
   console.log(isAuthenticated);
 
   return (
