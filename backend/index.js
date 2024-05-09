@@ -41,19 +41,19 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: true, // set to true if your using https
-      sameSite: "none", // set to none if your using https
-      httpOnly: true, // set to true if your using https
+      // secure: true, // set to true if your using https
+      // sameSite: "none", // set to none if your using https
+      // httpOnly: true, // set to true if your using https
     },
   })
 );
 
 app.use(cookieParser());
 
-app.use(passport.authenticate("session"));
+// app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable("trust proxy");
+// app.enable("trust proxy");
 
 // configure passport to use Google strategy
 const googleStrategy = new GoogleStrategy(
@@ -117,9 +117,9 @@ app.get(
 
 // google oauth 2.0 callback route
 // const CLIENT_URL = "http://localhost:5173/profile";
-// const CLIENT_HOME_PAGE_URL = "/profile";
-const CLIENT_HOME_PAGE_URL =
-  "https://google-login-test-client.vercel.app/profile";
+const CLIENT_HOME_PAGE_URL = "/profile";
+// const CLIENT_HOME_PAGE_URL =
+//   "https://google-login-test-client.vercel.app/profile";
 app.get(
   "/api/auth/google/callback",
   passport.authenticate("google", {
