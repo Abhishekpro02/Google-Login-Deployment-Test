@@ -20,30 +20,63 @@ const User = () => {
     };
     fetchUsers();
   }, []);
+
   return (
     <div>
-      <h1>User List </h1>
+      <h1>User List</h1>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
-        <ul>
-          {users.map((user) => (
-            <li key={user._id}>
-              <img
-                src={user.avatar}
-                alt="User Avatar"
-                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-              />
-              <h3>{user.displayName}</h3>
-              <p>{user.email}</p>
-              <p>Google ID : {user.googleId}</p>
-              <p>Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
-            </li>
-          ))}
-        </ul>
+        <div style={styles.tableContainer}>
+          <ul style={styles.userList}>
+            {users.map((user) => (
+              <li key={user._id} style={styles.userItem}>
+                <img
+                  src={user.avatar}
+                  alt="User Avatar"
+                  style={styles.avatar}
+                />
+                <div style={styles.userInfo}>
+                  <h3>{user.displayName}</h3>
+                  <p>{user.email}</p>
+                  <p>Google ID: {user.googleId}</p>
+                  <p>Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   );
 };
 
 export default User;
+
+const styles = {
+  tableContainer: {
+    border: "2px solid #ccc",
+    borderRadius: "5px",
+    padding: "10px",
+  },
+  userList: {
+    listStyle: "none",
+    padding: 0,
+  },
+  userItem: {
+    display: "flex",
+    alignItems: "center",
+    borderBottom: "1px solid #ccc",
+    marginBottom: "10px",
+    paddingBottom: "10px",
+  },
+  avatar: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    marginRight: "20px",
+  },
+  userInfo: {
+    flex: 1,
+  },
+};
