@@ -27,9 +27,10 @@ const User = () => {
         style={{
           color: "#f50f72",
           textAlign: "center",
+          marginTop: "20px",
         }}
       >
-        User List
+        List of Users
       </h1>
       {loading ? (
         <h1>Loading...</h1>
