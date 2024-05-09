@@ -40,9 +40,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      // secure: true, // set to true if your using https
-      // sameSite: "none", // set to none if your using https
-      // httpOnly: true, // set to true if your using https
+      secure: true, // set to true if your using https
+      sameSite: "strict", // set to none if your using https
+      httpOnly: true, // set to true if your using https
     },
   })
 );
@@ -144,11 +144,16 @@ app.get("/api/profile", isAuthnticated, (req, res) => {
 
 // logout
 
-app.get("/api/logout", (req, res) => {
+app.get("/api/logout", (req, res, next) => {
   req.session.destroy((err) => {
-    res.json({
-      success: true,
-      message: "Logged out successfully",
+    if (err) return next(err);
+    res.clearCookie("connect.sid", {
+      secure: true,
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    res.status(200).json({
+      message: "Logged Out",
     });
   });
 });
