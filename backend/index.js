@@ -151,6 +151,24 @@ app.get("/api/auth/logout", isAuthnticated, (req, res) => {
   });
 });
 
+// users route.
+app.get("/api/users", isAuthnticated, async (req, res) => {
+  try {
+    const users = await User.find({});
+
+    res.status(200).json({
+      success: true,
+      message: "All users",
+      users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
+  }
+});
+
 // failure redirect route.
 app.get("/api/auth/failure", (req, res) => {
   res.status(401).json({
