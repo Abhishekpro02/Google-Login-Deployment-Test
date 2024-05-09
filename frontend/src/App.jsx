@@ -8,16 +8,26 @@ import ProtectedRoute from "./Protectedroute";
 
 const App = () => {
   const { authUser } = useAuthContext();
-  const isAuthenticated = authUser ? true : false;
-  console.log(isAuthenticated);
+  // const isAuthenticated = authUser ? true : false;
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
+        {authUser ? (
           <Route path="/profile" element={<Profile />} />
-          <Route path="/users" element={<User />} />
-        </Route>
+        ) : (
+          <Route path="/profile" element={<Home />} />
+        )}
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        {authUser ? (
+          <Route
+            path="/users"
+            element={<ProtectedRoute isAuthenticated={authUser} />}
+          />
+        ) : (
+          <Route path="/users" element={<Home />} />
+        )}
+        {/* <Route path="/users" element={<User />} /> */}
         <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
