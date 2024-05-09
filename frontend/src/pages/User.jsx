@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Loader from "../components/Loader";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -33,7 +34,7 @@ const User = () => {
         List of Users
       </h1>
       {loading ? (
-        <h1>Loading...</h1>
+        <Loader />
       ) : (
         <div style={styles.tableContainer}>
           <ul style={styles.userList}>

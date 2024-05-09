@@ -145,11 +145,10 @@ app.get("/api/profile", isAuthnticated, (req, res) => {
 // logout
 
 app.get("/api/logout", (req, res) => {
-  req.session.destroy((err) => {
-    res.json({
-      success: true,
-      message: "Logged out successfully",
-    });
+  req.logout();
+  res.status(200).json({
+    success: true,
+    message: "Logout successful",
   });
 });
 
