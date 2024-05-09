@@ -23,7 +23,14 @@ const User = () => {
 
   return (
     <div>
-      <h1>User List</h1>
+      <h1
+        style={{
+          color: "#f50f72",
+          textAlign: "center",
+        }}
+      >
+        User List
+      </h1>
       {loading ? (
         <h1>Loading...</h1>
       ) : (
@@ -58,6 +65,8 @@ const styles = {
     border: "2px solid #ccc",
     borderRadius: "5px",
     padding: "10px",
+    margin: "20px auto",
+    width: "80%",
   },
   userList: {
     listStyle: "none",
