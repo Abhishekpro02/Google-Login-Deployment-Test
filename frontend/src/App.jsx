@@ -20,10 +20,7 @@ const App = () => {
         )}
         {/* <Route path="/profile" element={<Profile />} /> */}
         {authUser ? (
-          <Route
-            path="/users"
-            element={<ProtectedRoute isAuthenticated={authUser} />}
-          />
+          <Route path="/users" element={<User />} />
         ) : (
           <Route path="/users" element={<Home />} />
         )}
