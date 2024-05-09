@@ -1,13 +1,24 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
 
 const Navbar = () => {
-  const { authUser } = useAuthContext();
+  const { authUser, setAuthUser } = useAuthContext();
 
-  const handleLogout = () => {
-    // Perform logout functionality
-    console.log("Logout");
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch(`/api/logout`, {
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+      setAuthUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

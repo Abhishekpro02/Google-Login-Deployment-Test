@@ -142,12 +142,14 @@ app.get("/api/profile", isAuthnticated, (req, res) => {
   });
 });
 
-// logout route.
-app.get("/api/auth/logout", isAuthnticated, (req, res) => {
-  req.logout();
-  res.status(200).json({
-    success: true,
-    message: "Logout successful",
+// logout
+
+router.get("/api/logout", (req, res) => {
+  req.session.destroy((err) => {
+    res.json({
+      success: true,
+      message: "Logged out successfully",
+    });
   });
 });
 
