@@ -29,6 +29,7 @@ app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
@@ -40,18 +41,19 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      // secure: true, // set to true if your using https
-      // sameSite: "strict", // set to none if your using https
-      // httpOnly: true, // set to true if your using https
+      secure: true, // set to true if your using https
+      sameSite: "none", // set to none if your using https
+      httpOnly: true, // set to true if your using https
     },
   })
 );
 
 app.use(cookieParser());
 
-// initialize passport
+app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.enable("trust proxy");
 
 // configure passport to use Google strategy
 const googleStrategy = new GoogleStrategy(
@@ -115,7 +117,9 @@ app.get(
 
 // google oauth 2.0 callback route
 // const CLIENT_URL = "http://localhost:5173/profile";
-const CLIENT_HOME_PAGE_URL = "/profile";
+// const CLIENT_HOME_PAGE_URL = "/profile";
+const CLIENT_HOME_PAGE_URL =
+  "https://google-login-test-client.vercel.app/profile";
 app.get(
   "/api/auth/google/callback",
   passport.authenticate("google", {
@@ -150,7 +154,7 @@ app.get("/api/logout", (req, res, next) => {
     res.clearCookie("connect.sid", {
       secure: true,
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "none",
     });
     res.status(200).json({
       message: "Logged Out",
