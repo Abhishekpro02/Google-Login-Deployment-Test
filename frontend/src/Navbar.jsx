@@ -45,7 +45,12 @@ const Navbar = () => {
               <img
                 src={authUser.avatar}
                 alt=""
-                style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  borderRadius: "50%",
+                  margin: "0 10px",
+                }}
               />
 
               <li style={styles.navItem}>
