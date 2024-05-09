@@ -42,25 +42,11 @@ const Navbar = () => {
           </li>
           {authUser ? (
             <>
-              <li
-                style={{
-                  ...styles.navItem,
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <img
-                  src={authUser.avatar}
-                  alt=""
-                  style={{
-                    width: "40px",
-                    height: "40px",
-                    borderRadius: "50%",
-                    margin: "0 10px",
-                  }}
-                />
+              <li style={styles.navItem}>
+                <NavLink to="/profile" style={styles.navLink}>
+                  {authUser.displayName}
+                </NavLink>
               </li>
-
               <li style={styles.navItem}>
                 <button style={styles.logoutButton} onClick={handleLogout}>
                   Logout
